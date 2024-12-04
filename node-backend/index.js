@@ -6,7 +6,11 @@ require('dotenv').config();
 const app = express();
 const port = 3001;
 
-app.use(cors());
+app.use(cors({
+  origin: 'http://localhost:3000',  // Địa chỉ của frontend
+  methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Các phương thức HTTP cho phép
+  allowedHeaders: ['Content-Type', 'Authorization'],  // Các headers cần thiết cho request
+}));
 
 // MySQL connection setup
 const db = mysql.createConnection({

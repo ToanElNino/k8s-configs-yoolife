@@ -1,1 +1,8 @@
 kubectl apply -f k8s/argocd-application.yaml
+
+docker build -t toanelnino1902/node-backend:latest .
+docker push toanelnino1902/node-backend:latest
+
+
+docker build -t toanelnino1902/node-backend:latest .
+docker push toanelnino1902/node-backend:latest

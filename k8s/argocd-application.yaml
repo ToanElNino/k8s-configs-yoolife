@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: yoolife-app
+  namespace: argocd
+spec:
+  project: default  # Đây là giá trị mặc định, bạn có thể thay bằng một project khác nếu muốn
+  destination:
+    name: ''
+    namespace: argocd  # Namespace của bạn trên Kubernetes
+    server: https://kubernetes.default.svc
+  source:
+    repoURL: https://github.com/ToanElNino/k8s-configs-yoolife.git
+    targetRevision: master  # Nhánh bạn đang sử dụng
+    path: k8s  # Nếu bạn muốn triển khai từ thư mục gốc
+  syncPolicy:
+    automated:
+      prune: true  # Tự động xoá các tài nguyên không còn trong repo
+      selfHeal: true  # Tự động khôi phục tài nguyên khi bị thay đổi ngoài ý muốn

@@ -1,0 +1,30 @@
+version: "3"
+services:
+  mysql:
+    image: mysql:5.7
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: users_db
+    volumes:
+      - ./mysql-database/init.sql:/docker-entrypoint-initdb.d/init.sql
+    ports:
+      - "3306:3306"
+  
+  backend:
+    build: ./node-backend
+    environment:
+      MYSQL_HOST: mysql
+      MYSQL_USER: root
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: users_db
+    ports:
+      - "3001:3001"
+    depends_on:
+      - mysql
+
+  frontend:
+    build: ./react-frontend
+    ports:
+      - "80:80"
+    depends_on:
+      - backend

@@ -7,7 +7,7 @@ const app = express();
 const port = 3001;
 
 app.use(cors({
-  origin: 'http://localhost:3000',  // Địa chỉ của frontend
+  origin: ['http://192.168.64.2:30930', 'http://localhost:3000'],  // Thêm cả hai địa chỉ vào danh sách
   methods: ['GET', 'POST', 'PUT', 'DELETE'],  // Các phương thức HTTP cho phép
   allowedHeaders: ['Content-Type', 'Authorization'],  // Các headers cần thiết cho request
 }));
